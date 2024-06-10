@@ -19,10 +19,8 @@ pipeline {
         }
         stage('push docker') {
             steps {
-                withCredentials([string(credentialsId: 'DOCKER', variable: 'DOCKER')]) {
-                    sh 'docker login -u sultantokan -p ${DOCKER}'
-                    sh 'docker push sultantokan/application'
-                }
+                sh 'docker login -u sultantokan -p Sultan777Lol'
+                sh 'docker push sultantokan/application'
             }
         }
         stage('deploy k8s') {
