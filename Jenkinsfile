@@ -24,12 +24,18 @@ pipeline {
             }
         }
         stage('deploy k8s') {
-            steps {
-                bat 'kubectl delete deployment spring-boot-app || true'
-                bat 'kubectl apply -f k8s/metrics.yaml'
-                bat 'kubectl apply -f k8s/postgres.yaml'
-                bat 'kubectl apply -f k8s/application.yaml'
-            }
-        }
+                    steps {
+                        withCredentials([string(credentialsId: 'kubeconf', variable: 'KUBECONFIG_CONTENT')]) {
+                            writeFile file: 'kubeconfig', text: env.KUBECONFIG_CONTENT
+
+                            withEnv(["KUBECONFIG=${pwd()}/kubeconfig"]) {
+                                bat 'kubectl delete deployment spring-boot-app || true'
+                                bat 'kubectl apply -f k8s/metrics.yaml'
+                                bat 'kubectl apply -f k8s/postgres.yaml'
+                                bat 'kubectl apply -f k8s/application.yaml'
+                            }
+                        }
+                    }
+                }
     }
 }
