@@ -20,6 +20,7 @@ public class AuthenticationController {
 
     @GetMapping("/hello")
     String sayHello(){
+        System.out.println("Whatttt");
         return "Hello World!";
     }
     @GetMapping("/bye")
