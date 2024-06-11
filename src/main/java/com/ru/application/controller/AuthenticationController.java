@@ -21,7 +21,7 @@ public class AuthenticationController {
     @GetMapping("/hello")
     String sayHello(){
         System.out.println("Whatttt");
-        return "Hello World!";
+        return "Hello World!!!";
     }
     @GetMapping("/bye")
     String sayBy(){
