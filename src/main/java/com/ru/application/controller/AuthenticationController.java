@@ -25,6 +25,6 @@ public class AuthenticationController {
     }
     @GetMapping("/bye")
     String sayBy(){
-        return "Bye Bye!";
+        return "Bye Bye!!!";
     }
 }
